@@ -8,7 +8,7 @@ import javafx.util.Callback;
 
 /**
  * <p>
- * A PaginatedTiles control combines the Pagination Control with the TilePane control.
+ * A PaginatedTiles control combines the Pagination control with the TilePane control.
  * The control needs a list of data items, a cell factory for those data items and
  * the width and height of the tiles specified (needed to calculate the tiles that
  * fit on one page as well as the page count)
