@@ -9,14 +9,13 @@ import javafx.scene.layout.TilePane;
 
 public class PaginatedTilesSkin<T> extends BehaviorSkinBase<PaginatedTiles<T>, PaginatedTilesBehavior<T>> {
 
-
     /* **********************************************************************
      *                                                                      *
      * Constructors                                                         *
      *                                                                      *
      ***********************************************************************/
 
-    public PaginatedTilesSkin(PaginatedTiles<T> control) {
+    public PaginatedTilesSkin(PaginatedTiles control) {
         super(control, new PaginatedTilesBehavior(control));
         init();
     }
@@ -70,9 +69,7 @@ public class PaginatedTilesSkin<T> extends BehaviorSkinBase<PaginatedTiles<T>, P
         pagination = new Pagination();
         pagination.setPageFactory(this::pageFactory);
 
-        getSkinnable().itemListProperty().addListener( (ListChangeListener<T>) listener -> {
-            onListChange();
-        });
+        getSkinnable().itemListProperty().addListener( (ListChangeListener<T>) listener -> onListChange());
 
         getChildren().add(pagination);
     }
@@ -114,7 +111,6 @@ public class PaginatedTilesSkin<T> extends BehaviorSkinBase<PaginatedTiles<T>, P
     /**
      * Registers listeners to the size properties of the pageContainer, that call the onResize method.
      * @param pageContainer the pageContainer of the page
-     * @param page
      */
     private void registerSizeListeners( StackPane pageContainer, TilePane page ) {
         pageContainer.heightProperty().addListener( observable -> {
@@ -151,7 +147,6 @@ public class PaginatedTilesSkin<T> extends BehaviorSkinBase<PaginatedTiles<T>, P
      * If the resizing caused changes this method calls the correct follow-up methods to rebuild the page.
      *
      * @param pageContainer the pageContainer of a page
-     * @param page
      */
     private void onResize( StackPane pageContainer, TilePane page ) {
         int tileCountHorizontal = 1;
@@ -165,8 +160,8 @@ public class PaginatedTilesSkin<T> extends BehaviorSkinBase<PaginatedTiles<T>, P
         double tileVGap = page.getVgap();
 
         // Calc tilesPerPage
-        tileCountHorizontal += ( pageContainer.getWidth() - tileWidth - 1 ) / ( tileWidth + tileHGap );
-        tileCountVertical += (pageContainer.getHeight() - tileHeight - 1 ) / ( tileHeight + tileVGap );
+        tileCountHorizontal += ( pageContainer.getWidth() - tileWidth - 2 ) / ( tileWidth + tileHGap );
+        tileCountVertical += (pageContainer.getHeight() - tileHeight - 2 ) / ( tileHeight + tileVGap );
         tilesPerPage = tileCountHorizontal * tileCountVertical;
         tilesPerPage = ( tilesPerPage == 0 ) ? 1 : tilesPerPage;
 
@@ -180,6 +175,7 @@ public class PaginatedTilesSkin<T> extends BehaviorSkinBase<PaginatedTiles<T>, P
         page.setMaxHeight( (tileHeight * tileCountVertical) + (tileVGap * (tileCountVertical-1)) );
 
         if ( pagination.getPageCount() != pageCount ) {
+            this.tilesPerPage = tilesPerPage;
             Platform.runLater( () -> {
                 // This will recall the pageFactory - no further rebuilding of current page needed
                 pagination.setPageCount(pageCount);
