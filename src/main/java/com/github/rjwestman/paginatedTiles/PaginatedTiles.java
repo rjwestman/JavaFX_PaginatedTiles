@@ -96,7 +96,7 @@ public class PaginatedTiles<T> extends Control {
      * @param tileHeight the height of your tile cells - used to calculate the tiles that fit one one page and the page count.
      */
     public PaginatedTiles (ObservableList<T> itemList, double tileWidth, double tileHeight) {
-        this.itemList = new SimpleListProperty<T>(itemList);
+        this.itemList = new SimpleListProperty<>(itemList);
         init(tileWidth, tileHeight);
     }
 
@@ -127,7 +127,7 @@ public class PaginatedTiles<T> extends Control {
 
         this.tileWidth = new SimpleDoubleProperty(tileWidth);
         this.tileHeight = new SimpleDoubleProperty(tileHeight);
-        cellFactory = new SimpleObjectProperty<Callback<PaginatedTiles<T>, PaginatedTilesCell<T>>>(this, "cellFactory");
+        cellFactory = new SimpleObjectProperty<>(this, "cellFactory");
     }
 
     /* **********************************************************************
