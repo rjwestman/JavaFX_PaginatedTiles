@@ -18,7 +18,7 @@ public class PaginatedTilesBehavior<T> extends BehaviorBase<PaginatedTiles<T>> {
      *                                                                      *
      ***********************************************************************/
 
-    public PaginatedTilesBehavior(PaginatedTiles control) {
+    public PaginatedTilesBehavior(PaginatedTiles<T> control) {
         super(control, PAGINATEDGRID_BINDINGS);
     }
 
@@ -31,7 +31,7 @@ public class PaginatedTilesBehavior<T> extends BehaviorBase<PaginatedTiles<T>> {
     private static final String LEFT = "Left";
     private static final String RIGHT = "Right";
 
-    protected static final List<KeyBinding> PAGINATEDGRID_BINDINGS = new ArrayList<KeyBinding>();
+    protected static final List<KeyBinding> PAGINATEDGRID_BINDINGS = new ArrayList<>();
     static {
         PAGINATEDGRID_BINDINGS.add(new KeyBinding(KeyCode.LEFT, LEFT));
         PAGINATEDGRID_BINDINGS.add(new KeyBinding(KeyCode.RIGHT, RIGHT));
